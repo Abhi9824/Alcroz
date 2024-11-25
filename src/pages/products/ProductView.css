@@ -1,0 +1,67 @@
+:root {
+    --primary-color: rgb(18, 77, 70);
+    --secondary-color: rgb(255, 255, 255);
+
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.product-card {
+     overflow: hidden;
+    margin-bottom: 20px;
+    transition: transform 0.2s;
+    
+  }
+  .cardBody{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .product-card:hover {
+    transform: scale(1.05);
+  }
+  
+  
+
+  .card-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #333;
+  }
+  .productTitle{
+    display: flex;
+    justify-content: column;
+    flex-wrap: wrap;
+  }
+.main{
+  position:absolute;
+}
+.mainDiv{
+  padding: 0;
+  margin-bottom: 0;
+  position: relative;
+  top: 70px;
+}
+
+.caurousels{
+  
+    position: relative;
+    top: 72px;
+   
+    
+  }
+
+  .linkDecoration{
+    text-decoration: none;
+  }
+
+  .footer{
+    background-color: var(--primary-color);
+    color: white;
+  }

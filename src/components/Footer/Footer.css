@@ -1,0 +1,43 @@
+:root {
+    --primary-color: #25925d; /* Adjust this color as needed */
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+}
+
+.footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0;
+    width: 100%;
+}
+
+.brand-icon {
+    color: black;
+}
+
+.brandName {
+    text-decoration: none !important;
+    color: white !important; /* Ensure white text */
+    font-weight: bold;
+}
+
+.footer-description {
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.contact-info,
+.copyright {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.social-icons a {
+    color: white !important;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #f8f9fa !important; /* Slight hover effect */
+}

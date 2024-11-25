@@ -1,0 +1,15 @@
+img{
+    width: 100%;
+}
+.carousel-indicators [data-bs-target]{
+    border-radius: 100%;
+    width: 10px;
+    height: 10px;
+}
+.carousel-control-prev-icon{
+    /* border:1px solid black */
+background-color: black;
+}
+.carousel-control-next-icon{
+    background-color: black;
+}

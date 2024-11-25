@@ -1,0 +1,107 @@
+.container{
+    position: relative;
+     top: 80px;
+    
+}
+.row{
+    position: relative;
+    top:45px;
+}
+.priceCard {
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 8px; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 16px; 
+    margin: 0 auto; 
+    height: auto; 
+}
+
+hr{
+    padding: 0px;
+    
+}
+.address-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .address-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 16px;
+    position: relative;
+    transition: box-shadow 0.3s ease; 
+  }
+  
+  .address-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .address-card input[type="radio"] {
+    position: absolute;
+    top: 40px;
+    left: 16px;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+  }
+  
+  
+
+.addAdrres{
+    padding: 4px 8px;
+    border-radius: 5px;
+    background-color: white;
+    border-color: rgb(82, 81, 81);
+}
+
+.placeOrder{
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+}
+
+
+.placeOrder:hover{
+    background-color: var(--primary-color);
+    color: white;
+    
+}
+
+.adddess{
+    border: 1px solid black;
+}
+.fontSize{
+    font-size: 13px;
+}
+
+.edit{
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+.edit:hover{
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+.remove{
+    border: 1px solid black;
+    margin-left: 16px;
+
+    padding: 5px;
+}
+
+
+.remove:hover{
+    border: 1px solid black;
+    margin-left: 16px;
+
+    padding: 5px;
+}

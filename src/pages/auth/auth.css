@@ -1,0 +1,66 @@
+.auth__section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    margin-top: 10vh;
+    background-color: var(--secondary-color);
+  }
+  
+  .auth__container {
+    box-shadow: var(--shadow-alt);
+    padding: 2rem;
+    width: 500px;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+    border: var(--shadow-alt);
+  }
+  
+  .auth__container h2 {
+    text-align: center;
+    text-decoration: underline;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth__form {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .auth__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 4px 0px
+  }
+  
+  .auth__item input {
+    padding: 0.5rem;
+  }
+  
+  .auth__alt-link {
+    margin-top: 1rem;
+  }
+  .auth__alt-link span {
+    color: var(--accent-color);
+  }
+  
+  
+  
+  .show__password {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .show__password div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .submit__btn{
+    background-color: var(--primary-color);
+    color: white;
+  }

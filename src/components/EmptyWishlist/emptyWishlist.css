@@ -1,0 +1,65 @@
+/* Container styles */
+.empty-cart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 80vh; /* Adjust to make it vertically centered */
+    color: #333;
+  }
+  
+  /* Icon styles */
+  .icon-container {
+    margin-bottom: 20px;
+  }
+  
+  .cart-icon {
+    width: 100px;
+    height: 100px;
+    color: rgb(18, 77, 70) /* Matches Myntra's theme color */
+  }
+  
+  /* Text styles */
+  .text-container {
+    max-width: 400px;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  /* Button styles */
+  .add-items {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: white;
+    color: red;
+    border: red 1px solid;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-items:hover {
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: white;
+    color: rgb(0, 157, 255);
+    border: rgb(0, 157, 255) 1px solid;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  

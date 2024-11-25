@@ -1,0 +1,69 @@
+
+.heading{
+    position: relative;
+    top: 0px; 
+}
+.container{
+  font-family: "Roboto",;
+}
+.card{
+    border: none    ;
+}
+.btn-light{
+    border: 1px solid black;
+}
+
+.row{
+    display: flex;
+   
+}
+
+.row-card{
+  display: flex;
+
+}
+.cart-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    max-width: 100%;
+}
+.cart-card:hover {
+    transform: translateY(-4px); 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+}
+
+.danger{
+    background-color: var(--primary-color);
+    color:white
+}
+.danger:hover{
+    background-color: var(--primary-color);
+    color:white
+  }
+
+.priceCard {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    border-radius: 8px; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 16px; 
+    margin: 0 auto; 
+    height: auto; 
+}
+
+hr{
+    padding: 0px;   
+}
+
+.checkoutBtn{
+ background: var(--primary-color);
+ color: white; 
+}
+.checkoutBtn:hover{
+  background: var(--primary-color);
+  color: white; 
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+ }
+ 
