@@ -98,7 +98,7 @@ const Navbar = () => {
             </div>
 
             {/* Search Bar */}
-            <div className="search-bar d-flex align-items-center">
+            <div className="search-bar d-flex flex-column align-items-center mt-2">
               <form
                 onSubmit={handleSearch}
                 className="d-flex align-items-center"

@@ -21,8 +21,7 @@ const ProductList = () => {
   const { categoryGender, brand } = useParams();
   const { products, status, error, filteredProducts, filterByBrand } =
     useSelector((state) => state.products);
-  // console.log(products);
-
+  
   const [productCount, setProductCount] = useState(0);
 
   // ProductList.js

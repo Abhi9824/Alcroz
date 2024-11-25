@@ -24,8 +24,6 @@ const Profile = () => {
   useEffect(() => {
     const userToken = localStorage.getItem("token");
     const userId = user?._id;
-
-    console.log("UserID", userId);
     if (userToken && userId) {
       dispatch(fetchAllAddress(userId));
     } else if (brand) {
@@ -34,7 +32,6 @@ const Profile = () => {
   }, [dispatch, brand, user]);
 
   const addHandler = (addressData) => {
-    console.log("addresssss", addressData);
     if (user?._id) {
       setShowForm(true);
       dispatch(addAddress({ userId: user._id, addressData }))
@@ -46,8 +43,6 @@ const Profile = () => {
 
   const deleteAddressHandler = (addressId) => {
     if (user?._id) {
-      console.log("userId Dele in profile:", user?._id);
-      console.log("addresssId Dele in profile:", addressId);
       dispatch(deleteAddress({ userId: user._id, addressId }))
         .then(() => dispatch(fetchAllAddress(user._id)))
         .catch((error) => console.error("Failed to delete address:", error));

@@ -44,8 +44,6 @@ const Wishlist = () => {
     }
   }, [dispatch, brand, user]);
 
-  console.log("wihslist products:", wishlistProducts);
-
   const removeFromWishlistHandler = (userId, productId) => {
     dispatch(removeFromWishlist({ userId, productId })).then(() => {
       toast.success("Removed from Wishlist", {
@@ -62,13 +60,10 @@ const Wishlist = () => {
       navigate("/login");
       return;
     }
-    console.log("modal status before:", showModal);
 
     setSelectedProduct(product);
     setShowModal(true);
     setSelectedSize(null);
-
-    console.log("modal status after:", showModal);
   };
 
   // Function to handle size selection and dispatch addToCart
@@ -83,10 +78,8 @@ const Wishlist = () => {
     if (existingItem) {
       toast.warning("This item is already in your cart.");
       setShowModal(false);
-      console.log("wihslist modal", showModal);
       return;
     }
-
     if (selectedProduct) {
       dispatch(
         addToCart({

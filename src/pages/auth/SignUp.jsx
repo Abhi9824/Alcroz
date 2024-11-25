@@ -26,11 +26,6 @@ const SignUp = () => {
       return;
     }
 
-    console.log("name", form.name);
-    console.log("email", form.email);
-    console.log("username", form.username);
-    console.log("password", form.password);
-
     const resultAction = await dispatch(signupUser(form));
     if (resultAction.type === signupUser.fulfilled.type) {
       toast.success("Signup Successful!");

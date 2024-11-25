@@ -43,9 +43,6 @@ const Checkout = () => {
 
   const removeHandler = (addressId) => {
     if (userId) {
-      console.log("userId Dele:", userId);
-      console.log("addresssId Dele:", addressId);
-
       dispatch(deleteAddress({ userId, addressId }))
         .then(() => dispatch(fetchAllAddress(userId)))
         .catch((error) => console.error("Failed to delete address:", error));
@@ -67,8 +64,8 @@ const Checkout = () => {
   };
 
   const editHandler = (userId, address) => {
-    setEditAddress(address); 
-    setShowForm(true); 
+    setEditAddress(address);
+    setShowForm(true);
   };
   // Calculate subtotal, discount, tax, and grand total
   const subtotal = cartProducts?.length
