@@ -55,6 +55,7 @@ body {
 
 .search-bar {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
 }
@@ -124,3 +125,18 @@ body {
 .login_style{
     font-size: 18px;
 }
+
+.nav-pills {
+    gap: 1.5rem; /* Adjust spacing between navigation links */
+  }
+  
+  .search-bar {
+    gap: 1rem; /* Adjust spacing between search bar items */
+  }
+  
+  @media (max-width: 768px) {
+    .search-input {
+      width: 100%; /* Ensure input takes full width on smaller screens */
+    }
+  }
+  

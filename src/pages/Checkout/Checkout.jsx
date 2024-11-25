@@ -148,7 +148,7 @@ const Checkout = () => {
             ))}
           </div>
         </div>
-        <div className="col-md-4 ms-4 ">
+        <div className="col-md-4 mx-1 ">
           <div className="card priceCard px-3 d-flex">
             <h5 className="fw-bold">ORDER SUMMARY</h5>
             <hr className="mt-0" />

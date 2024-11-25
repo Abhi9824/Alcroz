@@ -41,8 +41,8 @@ const Navbar = () => {
   };
   return (
     <header>
-      <nav className="navbar navbar-expand-lg navigation">
-        <div className="container-fluid d-flex justify-content-between align-items-center">
+      <nav className="navbar navbar-expand-lg navigation  ">
+        <div className="container-fluid d-flex justify-content-between align-items-center py-0">
           {/* Brand Section */}
           <div className="brand-icon">
             <Link to="/" className="nav-brand fs-4">
@@ -69,11 +69,9 @@ const Navbar = () => {
 
           {/* Collapsible Content */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <div className="d-flex justify-content-between w-100">
-              {" "}
-              {/* Added w-100 to stretch it */}
+            <div className="d-flex flex-wrap justify-content-between w-100">
               {/* Navigation Links */}
-              <ul className="nav-pills mb-0 mx-4">
+              <ul className="nav-pills mb-0 d-flex flex-wrap gap-3 mx-4">
                 <li className="nav-item">
                   <Link to="/productList" className="link">
                     All Products
@@ -95,74 +93,80 @@ const Navbar = () => {
                   </Link>
                 </li>
               </ul>
-            </div>
 
-            {/* Search Bar */}
-            <div className="search-bar d-flex flex-column align-items-center mt-2">
-              <form
-                onSubmit={handleSearch}
-                className="d-flex align-items-center"
-              >
-                <input
-                  type="text"
-                  className="form-control search-input me-2"
-                  placeholder="Search by Brands..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                />
-                <button type="submit" className="btn searchBtn">
-                  Search
-                </button>
-              </form>
-              <Link
-                to={`/wishlist`}
-                className="btn icon-button"
-                aria-label="Wishlist"
-              >
-                <AiOutlineHeart />
-              </Link>
-              <Link to={`/cart`}>
-                {" "}
-                <button className="btn icon-button" aria-label="Cart">
-                  <AiOutlineShoppingCart />
-                </button>
-              </Link>
-              {isloggedIn ? (
-                <>
-                  <Link to={`/profile`}>
-                    <button className="btn icon-button" aria-label="profile">
-                      <IoPersonCircleSharp />
+              {/* Search Bar */}
+              <div className="search-bar d-flex flex-wrap align-items-center mt-2 gap-3">
+                <div className="d-flex align-items-center gap-3">
+                  <form
+                    onSubmit={handleSearch}
+                    className="d-flex align-items-center  gap-2"
+                  >
+                    <input
+                      type="text"
+                      className="form-control search-input"
+                      placeholder="Search by Brands..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    <button type="submit" className="btn searchBtn">
+                      Search
                     </button>
-                  </Link>
-
-                  <Link to={`/login`} className="login_btn">
-                    <button
-                      className="btn icon-button d-flex align-items-center"
-                      aria-label="logout"
-                      onClick={logoutHandler}
-                    >
-                      <span className="d-flex align-items-center login_style">
-                        Logout
-                        <CiLogout className="ms-2" />
-                      </span>
-                    </button>
-                  </Link>
-                </>
-              ) : (
-                <div className="d-flex flex-row">
-                  <Link to={`/login`} className="login_btn">
-                    <button
-                      className="btn icon-button d-flex align-items-center"
-                      aria-label="profile"
-                    >
-                      <span className="d-flex align-items-center login_style">
-                        Login
-                        <IoIosLogIn className="ms-2" />
-                      </span>
-                    </button>
-                  </Link>
+                  </form>
                 </div>
-              )}
+
+                {/* Wishlist and Cart Icons */}
+                <div className="d-flex align-items-center gap-3">
+                  <Link
+                    to={`/wishlist`}
+                    className="btn icon-button"
+                    aria-label="Wishlist"
+                  >
+                    <AiOutlineHeart />
+                  </Link>
+
+                  <Link to={`/cart`}>
+                    <button className="btn icon-button" aria-label="Cart">
+                      <AiOutlineShoppingCart />
+                    </button>
+                  </Link>
+
+                  {isloggedIn ? (
+                    <>
+                      <Link to={`/profile`}>
+                        <button
+                          className="btn icon-button"
+                          aria-label="Profile"
+                        >
+                          <IoPersonCircleSharp />
+                        </button>
+                      </Link>
+
+                      <button
+                        className="btn icon-button d-flex align-items-center"
+                        aria-label="Logout"
+                        onClick={logoutHandler}
+                      >
+                        <span className="d-flex align-items-center login_style">
+                          Logout
+                          <CiLogout className="ms-2" />
+                        </span>
+                      </button>
+                    </>
+                  ) : (
+                    <Link to={`/login`} className="login_btn">
+                      <button
+                        className="btn icon-button d-flex align-items-center"
+                        aria-label="Login"
+                      >
+                        <span className="d-flex align-items-center login_style">
+                          Login
+                          <IoIosLogIn className="ms-2" />
+                        </span>
+                      </button>
+                    </Link>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
