@@ -20,7 +20,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isloggedIn } = useSelector((state) => state.authSlice);
-  // const { userId } = useParams();
+  console.log("userState", isloggedIn);
 
   const logoutHandler = () => {
     localStorage.removeItem("token");

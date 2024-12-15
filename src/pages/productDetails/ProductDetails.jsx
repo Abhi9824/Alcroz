@@ -48,6 +48,10 @@ const ProductDetails = () => {
   }, [brand, dispatch]);
 
   const handleWishlistClick = ({ userId, productId }) => {
+    if (!userId) {
+      toast.error("User not logged in");
+      return;
+    }
     dispatch(addToWishlist({ userId, productId }));
     toast.success("Added to wishlist", {
       style: {
