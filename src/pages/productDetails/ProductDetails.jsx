@@ -50,15 +50,19 @@ const ProductDetails = () => {
   const handleWishlistClick = ({ userId, productId }) => {
     if (!userId) {
       toast.error("User not logged in");
+      console.log("User Object:", user);
+      console.log("User ID:", userId);
+
       return;
+    } else {
+      dispatch(addToWishlist({ userId, productId }));
+      toast.success("Added to wishlist", {
+        style: {
+          backgroundColor: "green", 
+          autoClose: 2000,
+        },
+      });
     }
-    dispatch(addToWishlist({ userId, productId }));
-    toast.success("Added to wishlist", {
-      style: {
-        backgroundColor: "green", // Your desired background color
-        autoClose: 2000,
-      },
-    });
   };
 
   const handleSizeChange = (event) => {
