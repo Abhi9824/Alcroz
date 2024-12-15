@@ -79,8 +79,6 @@ const applyFilters = (state) => {
       prod.brand.toLowerCase().includes(state.brand.toLowerCase())
     );
   }
-
-  console.log("Updated Products After Filter: ", updatedProducts);
   return updatedProducts;
 };
 

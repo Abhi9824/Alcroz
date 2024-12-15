@@ -50,15 +50,12 @@ const ProductDetails = () => {
   const handleWishlistClick = ({ userId, productId }) => {
     if (!userId) {
       toast.error("User not logged in");
-      console.log("User Object:", user);
-      console.log("User ID:", userId);
-
       return;
     } else {
       dispatch(addToWishlist({ userId, productId }));
       toast.success("Added to wishlist", {
         style: {
-          backgroundColor: "green", 
+          backgroundColor: "green",
           autoClose: 2000,
         },
       });
