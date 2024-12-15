@@ -18,7 +18,6 @@ export const loginUser = createAsyncThunk("user/login", async (credentials) => {
       const { data } = response.data;
       console.log("Credentials data:", data);
       localStorage.setItem("token", data.token);
-      toast.success("Login Successful");
       return data.user;
     }
   } catch (error) {
@@ -39,7 +38,6 @@ export const signupUser = createAsyncThunk("user/signup", async (userData) => {
       const { data } = response.data;
       if (data?.token) {
         localStorage.setItem("token", data.token);
-        toast.success("SignUp Successful");
       }
       return data.user;
     }

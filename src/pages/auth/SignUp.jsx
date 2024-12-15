@@ -25,13 +25,16 @@ const SignUp = () => {
       toast.error("All fields are required!");
       return;
     }
-
-    const resultAction = await dispatch(signupUser(form));
-    if (resultAction.type === signupUser.fulfilled.type) {
-      toast.success("Signup Successful!");
-      navigate("/login");
-    } else {
-      toast.error("Signup Failed!");
+    try {
+      const resultAction = await dispatch(signupUser(form));
+      if (resultAction.type === signupUser.fulfilled.type) {
+        toast.success("Signup Successful!");
+        navigate("/login");
+      } else {
+        toast.error("Signup Failed!");
+      }
+    } catch (error) {
+      toast.error("Something went wrong. Please try again later.");
     }
   };
 
