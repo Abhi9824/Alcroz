@@ -142,7 +142,8 @@ const ProductDetails = () => {
                   <select
                     name="size"
                     className="form-select w-100"
-                    defaultValue=""
+                    // defaultValue=""
+                    value={selectedSize || ""}
                     onChange={handleSizeChange}
                   >
                     <option value="" disabled>
