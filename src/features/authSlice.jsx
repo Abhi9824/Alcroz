@@ -16,13 +16,13 @@ export const loginUser = createAsyncThunk("user/login", async (credentials) => {
 
     if (response.status === 200) {
       const { data } = response.data;
-      console.log("Credentials data:", data);
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token);s
       return data.user;
     }
   } catch (error) {
     console.error("Login Failed:", error);
-    toast.error("Login Failed");
+    toast.error("Login Failed! Wrong Credentials");
+    throw error;
   }
 });
 
