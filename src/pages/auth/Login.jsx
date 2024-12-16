@@ -30,7 +30,7 @@ const Login = () => {
 
     try {
       const user = await dispatch(loginUser(form)).unwrap();
-      if (user && user.username) {
+      if (user && user.username & user.password) {
         toast.success("Login Successful!");
         dispatch(setLoggedIn(user));
         navigate("/");
