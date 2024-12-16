@@ -101,7 +101,6 @@ const Cart = () => {
       // Add to wishlist
       dispatch(addToWishlist({ userId, productId }))
         .then(() => {
-          // Remove from cart after adding to wishlist
           return dispatch(removeFromCart({ userId, product: productId }));
         })
         .then(() => {
