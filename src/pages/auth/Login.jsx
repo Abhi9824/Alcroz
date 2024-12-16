@@ -30,10 +30,10 @@ const Login = () => {
 
     try {
       const user = await dispatch(loginUser(form)).unwrap();
-      if (user && user.username & user.password) {
+      if (user && user.username && user.password) {
         toast.success("Login Successful!");
-        dispatch(setLoggedIn(user));
         navigate("/");
+        setLoggedIn(user);
       }
     } catch (error) {
       toast.error(error || "Login Failed: Invalid credentials");
