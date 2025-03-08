@@ -178,9 +178,6 @@ const ProductDetails = () => {
               <div className="py-3 addTobagBtnDiv">
                 <button
                   className="addTobagBtn"
-                  // onClick={() =>
-                  //   addToCartHandler(userId,productData._id, selectedSize)
-                  // }
                   onClick={() =>
                     addToCartHandler({
                       userId,
@@ -205,7 +202,6 @@ const ProductDetails = () => {
       </div>
 
       {/* modal for size */}
-      {/* Modal for Size Guide */}
       {showSize && (
         <div className="modal">
           <div className="modal-content">

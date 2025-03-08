@@ -26,11 +26,8 @@ const Filter = () => {
     dispatch(filterByGender(updatedGender)); // Dispatch the updated gender array
   };
   
-  
- 
   const ratingHandler=(e)=>{
     const {value}=e.target;
-    console.log(value)
     dispatch(filterRating(value))
   }
 

@@ -139,9 +139,16 @@ const Cart = () => {
       <div>
         <Navbar />
         <div className="container mt-5 mb-5 py-3 ">
-          <h3 className="fw-bolder heading">
-            SHOPPING CART ({cartProducts.length})
-          </h3>
+          <div className="d-flex justify-content-between align-items-center py-2">
+            <h3 className="fw-bolder heading">
+              SHOPPING CART ({cartProducts.length})
+            </h3>
+            <Link to="/order-details">
+              <button className="btn order-details mt-3">
+                View Order Details
+              </button>
+            </Link>
+          </div>
 
           {cartStatus === "loading" && (
             <div className="py-4">

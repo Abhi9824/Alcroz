@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByBrand, toggleWishlist } from "../../features/productSlice";
+import { filterByBrand } from "../../features/productSlice";
 import { addToCart } from "../../features/cartSlice";
 import Navbar from "../../components/Navbar/Navbar";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -18,11 +18,8 @@ const Wishlist = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { brand } = useParams();
-  // const { products, status, error, wishlistProducts } = useSelector(
-  //   (state) => state.products
-  // );
   const { user } = useSelector((state) => state.authSlice);
-  const { products, status, error } = useSelector((state) => state.products);
+  const { status } = useSelector((state) => state.products);
   const { cartProducts } = useSelector((state) => state.cart);
 
   const { wishlistProducts } = useSelector((state) => state.wishlist);
@@ -97,15 +94,24 @@ const Wishlist = () => {
       });
     }
   };
+  useEffect(() => {
+    if (userId) {
+      dispatch(fetchWishlistProducts(userId));
+    }
+  }, [dispatch, userId]);
 
   return (
-    <>
-      <Navbar />
+    <div>
+      <div>
+        <Navbar />
+      </div>
       <div className="wishlist-body mb-4 py-2">
         <p className="fs-4 fw-bold">MY WISHLIST ({wishlistProducts.length})</p>
         {status === "loading" && <Loading />}
         {status === "success" && wishlistProducts.length === 0 && (
-          <EmptyWishlist />
+          <div className="empty-wishlist">
+            <EmptyWishlist />
+          </div>
         )}
         {status === "success" &&
           wishlistProducts &&
@@ -133,16 +139,12 @@ const Wishlist = () => {
                         <h5 className="card-title fw-bold">{product.title}</h5>
                         <p className="card-text">${product.price.toFixed(2)}</p>
                         <button
-                          className={`btn ${
-                            product.isWishlist ? "btn-danger" : "btn-secondary"
-                          }`}
+                          className={`btn btn-danger`}
                           onClick={() =>
                             removeFromWishlistHandler(userId, product._id)
                           }
                         >
-                          {product.isWishlist
-                            ? "Remove from Wishlist"
-                            : "Add to Wishlist"}
+                          {"Remove from Wishlist"}
                         </button>
                         <button
                           className="btn btn-dark px-5 py-2 mt-2"
@@ -158,7 +160,9 @@ const Wishlist = () => {
             </div>
           )}
       </div>
-      <Footer className="py-0" />
+      <div className="py-2 mt-2">
+        <Footer className="py-0" />
+      </div>
 
       {/* Modal for size selection */}
       {showModal && (
@@ -201,7 +205,7 @@ const Wishlist = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -11,9 +11,6 @@ export const addAddress = createAsyncThunk(
       if (!token) {
         throw new Error("User is not authenticated. Token is missing.");
       }
-      console.log("tokenn", token);
-      console.log("userrr", userId);
-      console.log("Address Data:", addressData);
       const response = await axios.post(
         `${backend_api}/${userId}/addresses`,
         addressData,
@@ -26,7 +23,6 @@ export const addAddress = createAsyncThunk(
       );
 
       if (response.status === 201) {
-        console.log("Address added:", response.data);
         return response.data;
       }
     } catch (error) {
@@ -55,7 +51,6 @@ export const updateAddress = createAsyncThunk(
         }
       );
       if (response.status === 200) {
-        console.log("updates Address:", response.data);
         return response.data;
       }
     } catch (error) {
@@ -97,10 +92,6 @@ export const fetchAllAddress = createAsyncThunk(
       if (!token) {
         throw new Error("User is not authenticated. Token is missing.");
       }
-
-      console.log("fetch ka", userId);
-      console.log("fetch ka token", token);
-
       const response = await axios.get(`${backend_api}/${userId}/addresses`, {
         headers: {
           "Content-Type": "application/json",
@@ -152,7 +143,6 @@ const addressSlice = createSlice({
         );
         if (!existingAddress) {
           state.addresses.push(action.payload.address);
-          console.log("new address action", action.payload);
         } else {
           console.error("Already address added.");
         }
@@ -169,7 +159,6 @@ const addressSlice = createSlice({
         const index = state.addresses.findIndex(
           (address) => address._id === action.payload._id
         );
-        console.log("update:", index);
         if (index !== -1) {
           state.addresses[index] = action.payload;
         }

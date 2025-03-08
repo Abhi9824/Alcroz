@@ -10,22 +10,18 @@ import { fetchCartProducts } from "../../features/cartSlice";
 import { addAddress } from "../../features/addressSlice";
 import { toast } from "react-toastify";
 import Footer from "../../components/Footer/Footer";
+import { placeOrder } from "../../features/orderSlice";
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { cartProducts, cartError, cartStatus } = useSelector(
-    (state) => state.cart
-  );
-  const { addresses, error, status, addressAdded } = useSelector(
-    (state) => state.address
-  );
+  const { cartProducts } = useSelector((state) => state.cart);
+  const { addresses, addressAdded } = useSelector((state) => state.address);
   const { user } = useSelector((state) => state.authSlice);
-
   const [selectedAddress, setSelectedAddress] = useState(null);
-
   const [showForm, setShowForm] = useState(false);
   const [editAddress, setEditAddress] = useState(null);
+  const [placeOrderStatus, setPlaceOrderStatus] = useState(false);
 
   const userId = user?._id;
 
@@ -80,110 +76,144 @@ const Checkout = () => {
   const shipping = subtotal > 50000 ? 0 : 100;
   const grandTotal = subtotal - discount + tax + shipping;
 
+  const handlePlaceOrder = () => {
+    if (!selectedAddress) {
+      toast.error("Please select a delivery address.");
+      return;
+    }
+
+    dispatch(placeOrder({ deliveryAddress: selectedAddress }))
+      .unwrap()
+      .then(() => {
+        setPlaceOrderStatus(true);
+        toast.success("Order placed successfully!");
+      })
+      .catch((error) => {
+        toast.error("Failed to place order. Try again.");
+        console.error("Order Error:", error);
+      });
+  };
+
   return (
     <>
       <div className="container">
         <div>
           <Navbar />
         </div>
-        <div className="row py-4 mb-4">
-          <div className="col-md-6">
-            <div className="d-flex justify-content-between">
-              <h5>Select Delivery Address</h5>
-              <button
-                className="addAdrres"
-                onClick={() => {
-                  setEditAddress(null);
-                  setShowForm(true);
-                }}
-              >
-                ADD NEW ADDRESS
-              </button>
-            </div>
-            <p className="fontSize">DEFAULT ADDRESS</p>
-            <div className="address-container">
-              {addresses?.map((address) => (
-                <div
-                  key={address._id}
-                  className="address-card card mb-2 py-4 mt-4"
+        {!placeOrderStatus ? (
+          <div className="row py-4 mb-4">
+            <div className="col-md-6">
+              <div className="d-flex justify-content-between">
+                <h5>Select Delivery Address</h5>
+                <button
+                  className="addAdrres"
+                  onClick={() => {
+                    setEditAddress(null);
+                    setShowForm(true);
+                  }}
                 >
-                  <div className="card-body d-flex align-items-start">
-                    {/* Added radio button for selecting address */}
-                    <div>
-                      <input
-                        type="radio"
-                        name="selectedAddress"
-                        value={address._id}
-                        checked={selectedAddress === address._id}
-                        onChange={() => setSelectedAddress(address._id)}
-                        className="me-2"
-                      />
-                    </div>
-                    <div className="px-2">
-                      <h6>{address.address?.locality}</h6>
-                      <p>
-                        {address.address?.street}
-                        <br />
-                        {address.address?.city}, {address.address?.state} -{" "}
-                        {address.address?.pinCode}
-                      </p>
-                      <p>
-                        Mobile: <b>{address.contact?.phoneNumber}</b>
-                      </p>
-                      <div className="d-flex">
-                        <button
-                          className="btn edit rounded"
-                          onClick={() => editHandler(userId, address)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="btn remove rounded"
-                          onClick={() => removeHandler(address._id)}
-                        >
-                          Remove
-                        </button>
+                  ADD NEW ADDRESS
+                </button>
+              </div>
+              <p className="fontSize">DEFAULT ADDRESS</p>
+              <div className="address-container">
+                {addresses?.map((address) => (
+                  <div
+                    key={address._id}
+                    className="address-card card mb-2 py-4 mt-4"
+                  >
+                    <div className="card-body d-flex align-items-start">
+                      {/* Added radio button for selecting address */}
+                      <div>
+                        <input
+                          type="radio"
+                          name="selectedAddress"
+                          value={address._id}
+                          checked={selectedAddress === address._id}
+                          onChange={() => setSelectedAddress(address._id)}
+                          className="me-2"
+                        />
+                      </div>
+                      <div className="px-2">
+                        <h6>{address.address?.locality}</h6>
+                        <p>
+                          {address.address?.street}
+                          <br />
+                          {address.address?.city}, {address.address?.state} -{" "}
+                          {address.address?.pinCode}
+                        </p>
+                        <p>
+                          Mobile: <b>{address.contact?.phoneNumber}</b>
+                        </p>
+                        <div className="d-flex">
+                          <button
+                            className="btn edit rounded"
+                            onClick={() => editHandler(userId, address)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="btn remove rounded"
+                            onClick={() => removeHandler(address._id)}
+                          >
+                            Remove
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+            <div className="col-md-4 mx-1 py-1 mb-5">
+              <div className="card priceCard px-3 d-flex">
+                <h5 className="fw-bold">ORDER SUMMARY</h5>
+                <hr className="mt-0" />
+                <p>
+                  Price({cartProducts.length} Item):{" "}
+                  <span className="float-end">${subtotal.toFixed(2)}</span>
+                </p>
+                <p>
+                  Discount:{" "}
+                  <span className="float-end">${discount.toFixed(2)}</span>
+                </p>
+                <p>
+                  Tax: <span className="float-end">${tax.toFixed(2)}</span>
+                </p>
+                <p>
+                  Shipping Charges:{" "}
+                  <span className="float-end">${shipping.toFixed(2)}</span>
+                </p>
+                <hr />
+                <h5 className="fw-bold">
+                  Grand Total:{" "}
+                  <span className="float-end">${grandTotal.toFixed(2)}</span>
+                </h5>
+                <hr />
+                <p>You will save ${discount.toFixed(0)} on this order.</p>
+                <Link to={`/checkout`}>
+                  <button
+                    className="btn placeOrder mt-2 w-100 py-2"
+                    onClick={handlePlaceOrder}
+                  >
+                    Place Order{" "}
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
-          <div className="col-md-4 mx-1 py-1 mb-5">
-            <div className="card priceCard px-3 d-flex">
-              <h5 className="fw-bold">ORDER SUMMARY</h5>
-              <hr className="mt-0" />
-              <p>
-                Price({cartProducts.length} Item):{" "}
-                <span className="float-end">${subtotal.toFixed(2)}</span>
-              </p>
-              <p>
-                Discount:{" "}
-                <span className="float-end">${discount.toFixed(2)}</span>
-              </p>
-              <p>
-                Tax: <span className="float-end">${tax.toFixed(2)}</span>
-              </p>
-              <p>
-                Shipping Charges:{" "}
-                <span className="float-end">${shipping.toFixed(2)}</span>
-              </p>
-              <hr />
-              <h5 className="fw-bold">
-                Grand Total:{" "}
-                <span className="float-end">${grandTotal.toFixed(2)}</span>
-              </h5>
-              <hr />
-              <p>You will save ${discount.toFixed(0)} on this order.</p>
-              <Link to={`/checkout`}>
-                <button className="btn placeOrder mt-2 w-100 py-2">
-                  Place Order{" "}
-                </button>
-              </Link>
-            </div>
+        ) : (
+          <div className="text-center mt-5">
+            <h2 className="text-success fw-bold">
+              Hurray! Order Placed Successfully!
+            </h2>
+            <Link to="/order-details">
+              <button className="btn order-details mt-3">
+                View Order Details
+              </button>
+            </Link>
           </div>
-        </div>
+        )}
 
         {showForm && (
           <div className="modal">

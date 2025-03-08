@@ -14,8 +14,10 @@ import Protected from "./components/Protected/Protected";
 import Login from "./pages/auth/Login";
 import SignUp from "./pages/auth/SignUp";
 import isloggedIn from "./components/Protected/Protected";
+import Orders from "./pages/Orders/Orders";
 
 function App() {
+
   return (
     <div>
       <Router>
@@ -60,6 +62,14 @@ function App() {
             element={
               <Protected isloggedIn={isloggedIn}>
                 <Checkout />
+              </Protected>
+            }
+          />
+          <Route
+            path="/order-details"
+            element={
+              <Protected isloggedIn={isloggedIn}>
+                <Orders />
               </Protected>
             }
           />

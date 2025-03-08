@@ -1,6 +1,6 @@
 .container{
     position: relative;
-     top: 80px;
+    top: 80px;
     
 }
 .row{
@@ -104,4 +104,29 @@ hr{
     margin-left: 16px;
 
     padding: 5px;
+}
+
+/* button */
+
+.text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+}
+.order-details {
+    background: linear-gradient(45deg, #064635, #1B9C85);
+    color: white !important;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.order-details:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }

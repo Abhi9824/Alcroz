@@ -113,7 +113,7 @@ const wishlistSlice = createSlice({
         if (!existingProduct) {
           state.wishlistProducts.push(action.payload);
         } else {
-          console.log("Already in the wishlist");
+          console.warn("Already in the wishlist");
         }
       })
 

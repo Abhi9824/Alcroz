@@ -15,7 +15,7 @@ const Protected = ({ children }) => {
     }
   }, [dispatch, isloggedIn, token]);
 
-  if (!isloggedIn && !token) {
+  if (!token) {
     return <Navigate to="/login" />;
   }
 

@@ -20,7 +20,6 @@ export const loginUser = createAsyncThunk("user/login", async (credentials) => {
       return data.user;
     }
   } catch (error) {
-    console.error("Login Failed:", error);
     toast.error("Login Failed! Wrong Credentials");
     throw error;
   }
@@ -43,7 +42,7 @@ export const signupUser = createAsyncThunk("user/signup", async (userData) => {
     }
   } catch (error) {
     toast.error("SignUp Failed");
-    console.error("SignUp Failed:", error);
+    throw new Error("Failed to Signup", error);
   }
 });
 
@@ -63,8 +62,7 @@ export const fetchUserProfile = createAsyncThunk(
         return response.data;
       }
     } catch (error) {
-      console.error("Error fetching profile details:", error);
-      toast.error("Failed to fetch profile details");
+      throw new Error("Failed to fetch the Profile Details");
     }
   }
 );
@@ -72,8 +70,8 @@ export const fetchUserProfile = createAsyncThunk(
 const authSlice = createSlice({
   name: "authSlice",
   initialState: {
-    user: null,
-    isloggedIn: !!localStorage.getItem("token"),
+    user: JSON.parse(localStorage.getItem("user")) || null,
+    isloggedIn: !!localStorage.getItem("token") || false,
     status: "idle",
     error: null,
   },
@@ -82,11 +80,12 @@ const authSlice = createSlice({
       state.user = null;
       state.isloggedIn = false;
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
     setLoggedIn: (state, action) => {
       state.user = action.payload;
       state.isloggedIn = true;
-      localStorage.removeItem("token");
+      localStorage.setItem("user", JSON.stringify(action.payload));
     },
   },
   extraReducers: (builder) => {
@@ -99,6 +98,7 @@ const authSlice = createSlice({
         state.status = "success";
         state.user = action.payload;
         state.isloggedIn = true;
+        localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = "failed";

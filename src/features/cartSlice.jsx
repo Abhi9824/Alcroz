@@ -16,7 +16,6 @@ export const fetchCartProducts = createAsyncThunk(
           Authorization: `${token}`,
         },
       });
-      console.log("fetch cart userId", userId);
       if (response.status === 200) {
         return response.data;
       } else if (response.status === 404) {
@@ -37,9 +36,6 @@ export const addToCart = createAsyncThunk(
       if (!token) {
         throw new Error("User is not authenticated. Token is missing.");
       }
-      console.log("userId in Cart adding:", userId);
-      console.log("token in Cart adding:", token);
-
       const response = await axios.post(
         `${backend_api}/${userId}/cart`,
         {
@@ -74,10 +70,6 @@ export const removeFromCart = createAsyncThunk(
       if (!token) {
         throw new Error("User is not authenticated. Token is missing.");
       }
-
-      console.log("delete uesrID", userId);
-      console.log("delete productId", product);
-
       const response = await axios.delete(
         `${backend_api}/${userId}/cart/${product}`,
         {
@@ -102,7 +94,6 @@ export const removeFromCart = createAsyncThunk(
 export const updateCartItem = createAsyncThunk(
   "cart/updateCartItem",
   async ({ userId, _id, quantity, selectedSize }) => {
-    console.log("Payload: ", { _id, quantity });
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -122,7 +113,6 @@ export const updateCartItem = createAsyncThunk(
         }
       );
       if (response.status === 200) {
-        console.log(response.data);
         return response.data;
       } else {
         throw new Error("Error updating cart item.");

@@ -52,7 +52,6 @@ const applyFilters = (state) => {
     updatedProducts = updatedProducts.filter((prod) =>
       state.gender.some((g) => prod.gender.includes(g))
     );
-    console.log("gender", updatedProducts);
   }
 
   // Filter by rating if one is selected
@@ -114,8 +113,6 @@ const productSlice = createSlice({
 
     filterRating: (state, action) => {
       state.rating = action.payload;
-      console.log(action.payload);
-
       state.filteredProducts = applyFilters(state);
     },
     priceFilter: (state, action) => {

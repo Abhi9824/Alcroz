@@ -1,17 +1,16 @@
-import React from 'react'
-
+import React from "react";
+import "./Loading.css";
 
 const Loading = () => {
   return (
-    
-    <div className="d-flex justify-content-center">
-  <div className="spinner-border text-success" role="status">
-    <span className="visually-hidden">Loading...</span>
-  </div>
-</div>
-      
-   
-  )
-}
+    <div className="loader-container">
+      <div className="loader-box">
+        <div className="image-placeholder"></div>
+        <div className="image-placeholder"></div>
+        <div className="image-placeholder"></div>
+      </div>
+    </div>
+  );
+};
 
 export default Loading;

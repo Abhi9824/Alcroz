@@ -21,7 +21,6 @@ const AddressForm = ({ setShowForm, existingAddress, userId }) => {
   useEffect(() => {
     // Set formData only if existingAddress is defined and has the expected structure
     if (existingAddress && existingAddress.contact && existingAddress.address) {
-      console.log(existingAddress);
       setFormData({
         contact: {
           name: existingAddress.contact?.name || "",
@@ -51,7 +50,6 @@ const AddressForm = ({ setShowForm, existingAddress, userId }) => {
     }));
   };
 
-  console.log("existing address", existingAddress);
   const handleSubmit = (e) => {
     e.preventDefault();
 

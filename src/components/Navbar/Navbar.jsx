@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import { MdAllInclusive } from "react-icons/md";
 import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
 import { IoPersonCircleSharp } from "react-icons/io5";
-// import { brandProduct } from '../../features/productSlice';
 import { fetchProducts, filterByBrand } from "../../features/productSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +12,6 @@ import { IoIosLogIn } from "react-icons/io";
 import { CiLogout } from "react-icons/ci";
 import { toast } from "react-toastify";
 import { logout } from "../../features/authSlice";
-// import { useParams } from "react-router-dom";
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
