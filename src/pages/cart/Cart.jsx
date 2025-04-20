@@ -91,7 +91,7 @@ const Cart = () => {
   const handleRemoveItem = (userId, product) => {
     dispatch(removeFromCart({ userId, product })).then(() => {
       dispatch(fetchCartProducts(userId));
-      toast.error("Remove from Cart");
+      toast.success("Remove from Cart");
     });
   };
 

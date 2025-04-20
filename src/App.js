@@ -17,7 +17,6 @@ import isloggedIn from "./components/Protected/Protected";
 import Orders from "./pages/Orders/Orders";
 
 function App() {
-
   return (
     <div>
       <Router>

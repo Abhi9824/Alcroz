@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginUser, setLoggedIn } from "../../features/authSlice"; // Assuming you have a loginUser slice for authentication
+import { loginUser, setLoggedIn } from "../../features/authSlice";
 import { toast } from "react-toastify";
 import "./auth.css";
 import { Link } from "react-router-dom";
@@ -13,6 +13,7 @@ const Login = () => {
   const [passwordType, setPasswordType] = useState("password");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const togglePasswordVisibility = () => {
     setPasswordType((prevType) =>
@@ -34,12 +35,18 @@ const Login = () => {
         toast.success("Login Successful!");
         dispatch(setLoggedIn(user));
         navigate("/");
-        // setLoggedIn(user);
       }
     } catch (error) {
       toast.error(error || "Login Failed: Invalid credentials");
       console.error("Login Error:", error);
     }
+  };
+  const handleGuest = () => {
+    dispatch(loginUser({ username: "guest_user", password: "1234" })).then(
+      () => {
+        navigate(location?.state?.from?.pathname || "/");
+      }
+    );
   };
 
   return (
@@ -88,12 +95,21 @@ const Login = () => {
                 Login
               </button>
             </div>
+            {/* ✅ Guest Login Button */}
+            <div className="auth__item">
+              <button
+                className="submit__btn guest__btn"
+                type="button"
+                onClick={handleGuest}
+              >
+                Try Guest Mode
+              </button>
+            </div>
           </form>
 
           <p className="auth__alt-link">
-            New user ?{" "}
+            New user?{" "}
             <Link className="font__accent-color" to="/signup">
-              {" "}
               Signup
             </Link>
           </p>

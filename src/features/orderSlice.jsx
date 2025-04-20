@@ -5,6 +5,37 @@ import { toast } from "react-toastify";
 
 const backend_api = `${BASE_URL}/user`;
 
+// Create Razorpay Order
+export const createRazorpayOrder = createAsyncThunk(
+  "order/createRazorpayOrder",
+  async ({ amount }) => {
+    const token = localStorage.getItem("token");
+    const response = await axios.post(
+      `${backend_api}/createRazorpayOrder`,
+      { amount },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      }
+    );
+    return response.data.razorpayOrder;
+  }
+);
+
+// Verify Razorpay Payment
+export const verifyRazorpayPayment = createAsyncThunk(
+  "order/verifyRazorpayPayment",
+  async ({ razorpay_order_id, razorpay_payment_id, razorpay_signature }) => {
+    const response = await axios.post(`${backend_api}/verifyRazorpay`, {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+    });
+    return response.data;
+  }
+);
 // Fetch user orders
 export const fetchUserOrders = createAsyncThunk(
   "order/fetchUserOrders",
@@ -31,7 +62,7 @@ export const fetchUserOrders = createAsyncThunk(
 // Place order
 export const placeOrder = createAsyncThunk(
   "order/placeOrder",
-  async ({ deliveryAddress }) => {
+  async ({ deliveryAddress, paymentInfo }) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -39,7 +70,7 @@ export const placeOrder = createAsyncThunk(
       }
       const response = await axios.post(
         `${backend_api}/placeOrder`,
-        { deliveryAddress },
+        { deliveryAddress, paymentInfo },
         {
           headers: {
             "Content-Type": "application/json",

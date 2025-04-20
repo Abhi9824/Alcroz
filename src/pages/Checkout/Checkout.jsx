@@ -10,7 +10,11 @@ import { fetchCartProducts } from "../../features/cartSlice";
 import { addAddress } from "../../features/addressSlice";
 import { toast } from "react-toastify";
 import Footer from "../../components/Footer/Footer";
-import { placeOrder } from "../../features/orderSlice";
+import {
+  placeOrder,
+  createRazorpayOrder,
+  verifyRazorpayPayment,
+} from "../../features/orderSlice";
 
 const Checkout = () => {
   const dispatch = useDispatch();
@@ -75,24 +79,80 @@ const Checkout = () => {
   const tax = 0.05 * (subtotal - discount);
   const shipping = subtotal > 50000 ? 0 : 100;
   const grandTotal = subtotal - discount + tax + shipping;
-
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (!selectedAddress) {
       toast.error("Please select a delivery address.");
       return;
     }
 
-    dispatch(placeOrder({ deliveryAddress: selectedAddress }))
-      .unwrap()
-      .then(() => {
-        setPlaceOrderStatus(true);
-        toast.success("Order placed successfully!");
-      })
-      .catch((error) => {
-        toast.error("Failed to place order. Try again.");
-        console.error("Order Error:", error);
-      });
+    try {
+      // Create Razorpay order
+      const razorpayOrder = await dispatch(
+        createRazorpayOrder({ amount: grandTotal })
+      ).unwrap();
+
+      // Open Razorpay checkout
+      const options = {
+        key: process.env.REACT_APP_RAZORPAY_KEY_ID,
+        amount: razorpayOrder.amount,
+        currency: razorpayOrder.currency,
+        order_id: razorpayOrder.id,
+        name: "Alcroz",
+        description: "Order Payment",
+        handler: async function (response) {
+          const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+            response;
+          try {
+            // Verify payment on backend
+            await dispatch(
+              verifyRazorpayPayment({
+                razorpay_order_id,
+                razorpay_payment_id,
+                razorpay_signature,
+              })
+            ).unwrap();
+
+            // Place final order
+            await dispatch(
+              placeOrder({
+                deliveryAddress: selectedAddress,
+                paymentInfo: {
+                  razorpay_order_id,
+                  razorpay_payment_id,
+                  razorpay_signature,
+                },
+              })
+            ).unwrap();
+
+            setPlaceOrderStatus(true);
+            toast.success("Order placed successfully!");
+          } catch (verificationError) {
+            toast.error("Payment verification failed. Please try again.");
+            console.error("Verification error:", verificationError);
+          }
+        },
+        theme: {
+          color: "#3399cc",
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      toast.error("Failed to initiate payment. Try again.");
+    }
   };
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <>
@@ -191,14 +251,20 @@ const Checkout = () => {
                 </h5>
                 <hr />
                 <p>You will save ${discount.toFixed(0)} on this order.</p>
-                <Link to={`/checkout`}>
+                {/* <Link to={`/checkout`}>
                   <button
                     className="btn placeOrder mt-2 w-100 py-2"
                     onClick={handlePlaceOrder}
                   >
-                    Place Order{" "}
+                    Pay For Order{" "}
                   </button>
-                </Link>
+                </Link> */}
+                <button
+                  className="btn placeOrder mt-2 w-100 py-2"
+                  onClick={handlePlaceOrder}
+                >
+                  Pay For Order
+                </button>
               </div>
             </div>
           </div>
