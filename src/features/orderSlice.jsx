@@ -12,7 +12,7 @@ export const createRazorpayOrder = createAsyncThunk(
     const token = localStorage.getItem("token");
     const response = await axios.post(
       `${backend_api}/createRazorpayOrder`,
-      { amount, currency: "USD" },
+      { amount },
       {
         headers: {
           "Content-Type": "application/json",

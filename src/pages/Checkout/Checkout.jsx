@@ -231,34 +231,26 @@ const Checkout = () => {
                 <hr className="mt-0" />
                 <p>
                   Price({cartProducts.length} Item):{" "}
-                  <span className="float-end">${subtotal.toFixed(2)}</span>
+                  <span className="float-end">₹{subtotal.toFixed(2)}</span>
                 </p>
                 <p>
                   Discount:{" "}
-                  <span className="float-end">${discount.toFixed(2)}</span>
+                  <span className="float-end">₹{discount.toFixed(2)}</span>
                 </p>
                 <p>
-                  Tax: <span className="float-end">${tax.toFixed(2)}</span>
+                  Tax: <span className="float-end">₹{tax.toFixed(2)}</span>
                 </p>
                 <p>
                   Shipping Charges:{" "}
-                  <span className="float-end">${shipping.toFixed(2)}</span>
+                  <span className="float-end">₹{shipping.toFixed(2)}</span>
                 </p>
                 <hr />
                 <h5 className="fw-bold">
                   Grand Total:{" "}
-                  <span className="float-end">${grandTotal.toFixed(2)}</span>
+                  <span className="float-end">₹{grandTotal.toFixed(2)}</span>
                 </h5>
                 <hr />
-                <p>You will save ${discount.toFixed(0)} on this order.</p>
-                {/* <Link to={`/checkout`}>
-                  <button
-                    className="btn placeOrder mt-2 w-100 py-2"
-                    onClick={handlePlaceOrder}
-                  >
-                    Pay For Order{" "}
-                  </button>
-                </Link> */}
+                <p>You will save ₹{discount.toFixed(0)} on this order.</p>
                 <button
                   className="btn placeOrder mt-2 w-100 py-2"
                   onClick={handlePlaceOrder}

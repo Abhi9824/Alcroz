@@ -129,7 +129,7 @@ const ProductDetails = () => {
                 </button>
               </div>
               <h4 className="fw-bolder">{productData.title}</h4>
-              <p>${productData.price.toFixed(2)}</p>
+              <p>₹ {productData.price.toFixed(2)}</p>
               <p>MRP Inclusive of all taxes</p>
               <p className="description">{productData.description}</p>
               <ul>

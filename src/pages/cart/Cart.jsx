@@ -144,9 +144,7 @@ const Cart = () => {
               SHOPPING CART ({cartProducts.length})
             </h3>
             <Link to="/order-details">
-              <button className="btn order-details mt-3">
-                View Order Details
-              </button>
+              <button className="btn order-details">View Order Details</button>
             </Link>
           </div>
 
@@ -155,11 +153,10 @@ const Cart = () => {
               <Loading />
             </div>
           )}
-
           {cartProducts?.length === 0 ? (
             <EmptyCart />
           ) : (
-            <div className="row  mb-4">
+            <div className="row mb-4">
               {/* Left Column - Cart Products */}
               <div className="col-md-7">
                 {cartProducts.map((product) => (
@@ -179,13 +176,13 @@ const Cart = () => {
                         </Link>
                       </div>
 
-                      <div className="col-md-4 mx-3">
+                      <div className="col-md-5 mx-3">
                         <div className="card-body d-flex flex-column align-items-start">
                           <h5 className="card-title fw-bold">
                             {product.productId.title}
                           </h5>
                           <p className="card-text">
-                            Price: ${product.productId.price.toFixed(2)}
+                            Price: ₹{product.productId.price.toFixed(2)}
                           </p>
                           <p className="mb-1">
                             Size:
@@ -253,26 +250,26 @@ const Cart = () => {
                   <hr className="mt-0" />
                   <p>
                     Price ({cartProducts.length} Item):{" "}
-                    <span className="float-end">${subtotal.toFixed(2)}</span>
+                    <span className="float-end">₹{subtotal.toFixed(2)}</span>
                   </p>
                   <p>
                     Discount:{" "}
-                    <span className="float-end">${discount.toFixed(2)}</span>
+                    <span className="float-end">₹{discount.toFixed(2)}</span>
                   </p>
                   <p>
-                    Tax: <span className="float-end">${tax.toFixed(2)}</span>
+                    Tax: <span className="float-end">₹{tax.toFixed(2)}</span>
                   </p>
                   <p>
                     Shipping Charges:{" "}
-                    <span className="float-end">${shipping.toFixed(2)}</span>
+                    <span className="float-end">₹{shipping.toFixed(2)}</span>
                   </p>
                   <hr />
                   <h5 className="fw-bold">
                     Grand Total:{" "}
-                    <span className="float-end">${grandTotal.toFixed(2)}</span>
+                    <span className="float-end">₹{grandTotal.toFixed(2)}</span>
                   </h5>
                   <hr />
-                  <p>You will save ${discount.toFixed(0)} on this order.</p>
+                  <p>You will save ₹{discount.toFixed(0)} on this order.</p>
                   <Link to={`/checkout`}>
                     <button className="btn checkoutBtn mt-3 w-100">
                       Checkout

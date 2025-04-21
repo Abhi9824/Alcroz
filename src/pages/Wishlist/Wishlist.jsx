@@ -137,7 +137,9 @@ const Wishlist = () => {
                       <div className="card-body">
                         <p className="card-text">{product.brand}</p>
                         <h5 className="card-title fw-bold">{product.title}</h5>
-                        <p className="card-text">${product.price.toFixed(2)}</p>
+                        <p className="card-text">
+                          ₹ {product.price.toFixed(2)}
+                        </p>
                         <button
                           className={`btn btn-danger`}
                           onClick={() =>

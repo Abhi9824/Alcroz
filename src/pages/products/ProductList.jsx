@@ -88,7 +88,7 @@ const ProductList = () => {
                         <p className="card-text fw-bold productTitle">
                           {prod.title}
                         </p>
-                        <p className="card-text fs-5 fw-bold">${prod.price}</p>
+                        <p className="card-text fs-5 fw-bold">₹ {prod.price}</p>
                         <p
                           className="card-text"
                           style={{ display: "flex", alignItems: "center" }}
