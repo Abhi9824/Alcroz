@@ -1,70 +1,164 @@
-# Getting Started with Create React App
+# 👟 Alcroz — Multi-Brand Footwear E-Commerce Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Alcroz** is a feature-rich, scalable footwear e-commerce application built for seamless product discovery, secure payments, and efficient order management. From multi-brand filtering to integrated Razorpay payments and downloadable receipts — Alcroz is designed to deliver a complete and modern shopping experience for all.
 
-## Available Scripts
+🌐 **[Live Demo](https://ecommerce-app-frontend-phi.vercel.app/)**
 
-In the project directory, you can run:
+🔗 **[Backend API Repo](https://github.com/Abhi9824/ecommerce-app-backend)**
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Installation
 
-### `npm test`
+### Frontend Setup
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/Abhi9824/Alcroz.git
+npm install
+npm run dev
+```
 
-### `npm run build`
+### Backend Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/Abhi9824/ecommerce-app-backend.git
+npm install
+node index.js
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ✨ Features
 
-### `npm run eject`
+### 🏠 Home Page
+- Hero banners
+- Featured collections
+- Quick links by gender & category
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 🛍️ Product Listing Page
+- Responsive grid layout
+- Dynamic filters and sorting
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🔍 Filtering Options
+- Brand
+- Gender (Men, Women, Unisex)
+- Category (Sneakers, Casual, etc.)
+- Price Range
+- Ratings
+- Sorting by Price or Rating
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 📦 Product Details
+- Product specs, image carousel, available sizes
+- Add to cart / wishlist
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 🛒 Cart & Wishlist
+- Add, update, remove products
+- View summaries, quantities, totals
 
-## Learn More
+### 🔐 Authentication (JWT)
+- Sign Up, Login
+- Token-based route access
+- Profile persistence
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 👤 Profile & Address Management
+- Add / Edit / Delete addresses
+- Used in checkout
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 💳 Razorpay Payments
+- Secure Razorpay integration
+- Verify payments
+- Download PDF receipts
 
-### Code Splitting
+### 📜 Order History
+- View all past orders
+- Re-download receipts
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## 🧩 Backend API Overview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| GET    | `/products` | Get all products |
+| POST   | `/products` | Add new product |
+| GET    | `/products/:id` | Get single product by ID |
+| PUT    | `/products/:productId` | Update a product |
+| DELETE | `/products/:productId` | Delete a product |
+| GET    | `/products/category/:categoryGender` | Filter by category/gender |
+| GET    | `/products/brand/:brandName` | Filter by brand |
 
-### Making a Progressive Web App
+### 🛒 Cart Routes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| GET    | `/user/:userId/cart` | Get user's cart |
+| POST   | `/user/:userId/cart` | Add to cart |
+| PUT    | `/user/:userId/cart/:id` | Update cart item |
+| DELETE | `/user/:userId/cart/:id` | Remove item from cart |
 
-### Advanced Configuration
+### 💖 Wishlist Routes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| GET    | `/user/:userId/wishlist` | Get wishlist |
+| POST   | `/user/:userId/wishlist` | Add to wishlist |
+| DELETE | `/user/:userId/wishlist/:productId` | Remove from wishlist |
 
-### Deployment
+### 📦 Orders & Payments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| POST   | `/user/createRazorpayOrder` | Create payment order |
+| POST   | `/user/verifyRazorpay` | Verify Razorpay signature |
+| POST   | `/user/placeOrder` | Finalize order |
+| GET    | `/user/getOrders` | Fetch all orders |
+| DELETE | `/user/deleteOrder/:orderId` | Delete specific order |
 
-### `npm run build` fails to minify
+### 🏠 Address Routes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| GET    | `/user/:userId/addresses` | Get all addresses |
+| POST   | `/user/:userId/addresses` | Add new address |
+| PUT    | `/user/:userId/addresses/:addressId` | Update address |
+| DELETE | `/user/:userId/addresses/:addressId` | Delete address |
+
+### 👤 User Routes
+
+| Method | Endpoint | Purpose |
+|--------|----------|---------|
+| POST   | `/user/signUp` | Register new user |
+| POST   | `/user/login` | Login user |
+| GET    | `/user/profile` | Get user profile |
+| GET    | `/users` | Get all users |
+
+---
+
+## 🛠️ Tech Stack
+
+### 🖥️ Frontend
+- React.js
+- Redux Toolkit
+- React Router DOM
+- Bootstrap 5
+- React Toastify
+
+### 🌐 Backend
+- Node.js + Express.js
+- MongoDB + Mongoose
+- JWT + bcrypt.js
+- Razorpay SDK
+- CORS
+- 
+---
+
+## 🙌 Author
+
+Developed with ❤️ by [Abhijit Chanda](https://github.com/Abhi9824)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
